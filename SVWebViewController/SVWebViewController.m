@@ -8,7 +8,7 @@
 
 #import "SVWebViewController.h"
 #import "NJKWebViewProgress.h"
-
+#define deviceWidthe [UIScreen mainScreen].bounds.size.width
 @interface SVWebViewController () <UIWebViewDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate,NJKWebViewProgressDelegate>
 
 @property (nonatomic, strong, readonly) UIBarButtonItem *backBarButtonItem;
