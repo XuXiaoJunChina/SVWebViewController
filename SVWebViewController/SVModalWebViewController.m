@@ -15,37 +15,22 @@
 
 @end
 
-@interface SVWebViewController (DoneButton)
-
-- (void)doneButtonTapped:(id)sender;
-
-@end
-
 
 @implementation SVModalWebViewController
+
+@synthesize barsTintColor, availableActions, webViewController;
 
 #pragma mark - Initialization
 
 
-- (instancetype)initWithAddress:(NSString*)urlString {
+- (id)initWithAddress:(NSString*)urlString {
     return [self initWithURL:[NSURL URLWithString:urlString]];
 }
 
-- (instancetype)initWithURL:(NSURL *)URL {
-    return [self initWithURLRequest:[NSURLRequest requestWithURL:URL]];
-}
-
-- (instancetype)initWithURLRequest:(NSURLRequest *)request {
-    self.webViewController = [[SVWebViewController alloc] initWithURLRequest:request];
+- (id)initWithURL:(NSURL *)URL {
+    self.webViewController = [[SVWebViewController alloc] initWithURL:URL];
     if (self = [super initWithRootViewController:self.webViewController]) {
-        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                                    target:self.webViewController
-                                                                                    action:@selector(doneButtonTapped:)];
-        
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-            self.webViewController.navigationItem.leftBarButtonItem = doneButton;
-        else
-            self.webViewController.navigationItem.rightBarButtonItem = doneButton;
+        self.webViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:webViewController action:@selector(doneButtonClicked:)];
     }
     return self;
 }
@@ -53,18 +38,11 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:NO];
     
-    self.webViewController.title = self.title;
-    self.navigationBar.tintColor = self.barsTintColor;
+    self.navigationBar.tintColor = self.toolbar.tintColor = self.barsTintColor;
 }
 
-#pragma mark - Delegate
-
-- (void)setWebViewDelegate:(id<UIWebViewDelegate>)webViewDelegate {
-    self.webViewController.delegate = webViewDelegate;
-}
-
-- (id<UIWebViewDelegate>)webViewDelegate {
-    return self.webViewController.delegate;
+- (void)setAvailableActions:(SVWebViewControllerAvailableActions)newAvailableActions {
+    self.webViewController.availableActions = newAvailableActions;
 }
 
 @end

@@ -6,12 +6,17 @@
 //
 //  https://github.com/samvermette/SVWebViewController
 
+#import <MessageUI/MessageUI.h>
+
+#import "SVModalWebViewController.h"
+
 @interface SVWebViewController : UIViewController
 
-- (instancetype)initWithAddress:(NSString*)urlString;
-- (instancetype)initWithURL:(NSURL*)URL;
-- (instancetype)initWithURLRequest:(NSURLRequest *)request;
+- (id)initWithAddress:(NSString*)urlString;
+- (id)initWithURL:(NSURL*)URL;
 
-@property (nonatomic, weak) id<UIWebViewDelegate> delegate;
 
+@property (nonatomic, readwrite) SVWebViewControllerAvailableActions availableActions;
+@property (nonatomic, copy)NSString *strTitle;
+@property (nonatomic, strong)UIWebView *mainWebView;
 @end

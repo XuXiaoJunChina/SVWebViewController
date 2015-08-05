@@ -8,13 +8,24 @@
 
 #import <UIKit/UIKit.h>
 
+enum {
+    SVWebViewControllerAvailableActionsNone             = 0,
+    SVWebViewControllerAvailableActionsOpenInSafari     = 1 << 0,
+    SVWebViewControllerAvailableActionsMailLink         = 1 << 1,
+    SVWebViewControllerAvailableActionsCopyLink         = 1 << 2
+};
+
+typedef NSUInteger SVWebViewControllerAvailableActions;
+
+
+@class SVWebViewController;
+
 @interface SVModalWebViewController : UINavigationController
 
-- (instancetype)initWithAddress:(NSString*)urlString;
-- (instancetype)initWithURL:(NSURL *)URL;
-- (instancetype)initWithURLRequest:(NSURLRequest *)request;
+- (id)initWithAddress:(NSString*)urlString;
+- (id)initWithURL:(NSURL *)URL;
 
 @property (nonatomic, strong) UIColor *barsTintColor;
-@property (nonatomic, weak) id<UIWebViewDelegate> webViewDelegate;
+@property (nonatomic, readwrite) SVWebViewControllerAvailableActions availableActions;
 
 @end
