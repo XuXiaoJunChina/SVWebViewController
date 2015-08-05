@@ -8,7 +8,7 @@
 
 #import "SVWebViewController.h"
 #import "NJKWebViewProgress.h"
-#import "MyWalletController.h"
+
 @interface SVWebViewController () <UIWebViewDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate,NJKWebViewProgressDelegate>
 
 @property (nonatomic, strong, readonly) UIBarButtonItem *backBarButtonItem;
@@ -228,16 +228,16 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    NSURL * url = [request URL];
-    NSString *urlstring = [NSString stringWithFormat:@"%@",url];
-    
-    
-    if([urlstring rangeOfString:@"ZCSmart_Client_ResponseTo_Wallet"].location != NSNotFound){
-        //说明包含某一字符串
-        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"进入我的钱包后选择优惠券" message:nil delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil] ;
-        alertView.delegate = self;
-        [alertView show];
-    }
+//    NSURL * url = [request URL];
+//    NSString *urlstring = [NSString stringWithFormat:@"%@",url];
+//    
+//    
+//    if([urlstring rangeOfString:@"ZCSmart_Client_ResponseTo_Wallet"].location != NSNotFound){
+//        //说明包含某一字符串
+//        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"进入我的钱包后选择优惠券" message:nil delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil] ;
+//        alertView.delegate = self;
+//        [alertView show];
+//    }
     
     
     
@@ -249,14 +249,14 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == 1) {
-        if(![UserInfoManager isCitizenCardBinded]){
-            [MxGlobal showErrorwithStatus:@"请先绑定市民卡" finish:nil];
-            return;
-        }
-        MyWalletController *walletController = [[MyWalletController alloc]init];
-        [self.navigationController pushViewController:walletController animated:YES];
-    }
+//    if (buttonIndex == 1) {
+//        if(![UserInfoManager isCitizenCardBinded]){
+//            [MxGlobal showErrorwithStatus:@"请先绑定市民卡" finish:nil];
+//            return;
+//        }
+//        MyWalletController *walletController = [[MyWalletController alloc]init];
+//        [self.navigationController pushViewController:walletController animated:YES];
+//    }
 }
 
 #pragma mark - Toolbar
